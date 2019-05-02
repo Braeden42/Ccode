@@ -1,5 +1,5 @@
 // https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glOrtho.xml
-// g++ plotDB.cpp -lglut -lGL -o plotDB.o
+// g++ plot_ahk_xy_0.cpp -lglut -lGL -o a.o
 #include <iostream>
 #include <cmath>
 #include <stdio.h>
@@ -13,43 +13,43 @@ void plot2Dpoint(float x,float y, float red, float green, float blue){
 
 void drawPoints()
 {
-    int x,y;
+    float x,y;
     float h,k;
-    float red = 0,green = 1.0 ,blue = 0.0;
+    float red = 1.0,green = 0.0 ,blue = 0.0;
     //glClearColor(red,green,blue,alpha);
-    glClearColor(0.4, 0.4, 0.4, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
     //void glOrtho(GLdouble left,  GLdouble right,
     //GLdouble bottom,  GLdouble top,
     //GLdouble nearVal,  GLdouble farVal);
-    glOrtho(-400.0, 400.0, -400.0, 400.0, -400.0, 400.0);
-    h = -1.0; k = -3.0;
+    glOrtho(-20.0, 20.0, 20.0, -20.0, -20.0, 20.0);
+    h = -0.5; k = -0.5;
     glPointSize(3.0);
     glBegin(GL_POINTS);// points
     //plot x axis
-    for (x = -400; x <= 400; x= x+2){
-      h = x;  k = 0; plot2Dpoint(h,k,1,0,1);
+    for (x = -20; x <= 20; x= x+2){
+      h = x;  k = 0; plot2Dpoint(h,k,1,1,1);
     }//end x
     //plot y axis
-    for (y = -400; y <= 400; y= y+2){
-      h = 0;  k = y; plot2Dpoint(h,k,1,0,1);
+    for (y = -20; y <= 20; y= y+2){
+      h = 0;  k = y; plot2Dpoint(h,k,1,1,1);
     }//end x
 
-    //plot y = a(x-k)^2 + k
-    for (x = -100; x <= 100; x++){
+    //plot y = a(x-k)^2 + k;
+    for (x = -20; x <= 20; x=x+0.005){
       h = x;
-      k = (float)(-3*((x - 30)*(x - 50))-5);
+      k = (float)pow(x,4);
         cout<<"points "<<h<<" "<<k<<endl;
-        plot2Dpoint(h,k,5,5,0);
+        plot2Dpoint(h,k,0,0,1);
       if (green > 1)green = 0;
     }//end j
 	// plot y = x^2
-    for (x = -100; x <= 100; x++){
+    for (x = -20; x <= 20; x=x+0.005){
       h = x;
-      k = (float)(+3*((x + 30)*(x + 50))+5);
+      k = (float)(-4*pow(x/10,3));
         cout<<"points "<<h<<" "<<k<<endl;
-        plot2Dpoint(h,k,0,1,0);
+        plot2Dpoint(h,k,1,0,0);
       if (green > 1)green = 0;
     }//end j
 
